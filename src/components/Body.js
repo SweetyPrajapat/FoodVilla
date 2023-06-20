@@ -18,14 +18,14 @@ export const Body = () => {
   const [searchText, setSearchText] = useState();
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
-
+  // const [allRestaurants, setAllRestaurants] = useState(RestaurantList);
   useEffect(() => {
     getRestaurants();
   }, []);
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.4192141&lng=76.9884276&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.4192141&lng=76.9884276&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
@@ -34,9 +34,10 @@ export const Body = () => {
   }
 
   if (!allRestaurants) return null;
-  if (filteredRestaurant.length === 0)
-    return <h1>no data metch your search</h1>;
-  return allRestaurants.length === 0 ? (
+  // if (filteredRestaurant.length === 0)
+  //   return <h1>no data metch your search</h1>;
+
+  return allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -53,7 +54,7 @@ export const Body = () => {
         <button
           className="search-btn"
           onClick={() => {
-            const data = filterData(searchText, restaurant);
+            const data = filterData(searchText, filteredRestaurant);
             // console.log(data);
             setFilteredRestaurant(data);
           }}
@@ -64,10 +65,7 @@ export const Body = () => {
       <div className="restaurant-list">
         {filteredRestaurant.map((restaurant) => {
           return (
-            <RestaurantCard
-              {...restaurant.data.data}
-              key={restaurant.data.data.id}
-            />
+            <RestaurantCard {...restaurant.data} key={restaurant?.data?.id} />
           );
         })}
         {/* <RestaurantCard {...RestaurantList[0].data.data} />

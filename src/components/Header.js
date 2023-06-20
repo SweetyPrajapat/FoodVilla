@@ -1,19 +1,36 @@
 import Title from "./Title";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const loggedInUser = () => {
-  return true;
-};
+// const loggedInUser = () => {
+//   return true;
+// };
+//2 types of routing
+//1. client side
+//2. server side
+
 export const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("useEffect");
+  // }, []);
+
+  // console.log("render");
   return (
     <div className="header">
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
           <li>Cart</li>
         </ul>
       </div>
