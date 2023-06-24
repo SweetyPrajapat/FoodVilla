@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/Header";
 import { Body } from "./components/Body";
@@ -9,6 +9,11 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
+import Shimmer from "./components/Shimmer";
+
+// import Instamart from "./components/Instamart";
+const Instamart = lazy(() => import("./components/Instamart"));
+//Upon Demand loading -> upon render -> suspends loading
 
 /* How to create object for sending data
 const pizza = {
@@ -19,6 +24,12 @@ const pizza = {
   rating: "4.2",
 };
 */
+// Chunking
+// code splitting
+// Dynamic bundling
+// Lazy loading
+// On demand loading
+// Dynamic import
 
 const AppLayout = () => {
   return (
@@ -57,6 +68,15 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            {/* <Suspense fallback={<h1>Loading...</h1>}> */}
+            <Instamart />
+          </Suspense>
+        ),
       },
     ],
   },
