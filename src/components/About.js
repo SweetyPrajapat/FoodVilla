@@ -9,6 +9,7 @@ const About = () => {
       <p>This is namaste react live coures</p>
       {<Profile name={"Sweety"} />}
       {<ProfileCls name={"Pari"} />}
+      <Outlet />
     </div>
   );
 };

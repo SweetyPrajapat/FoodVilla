@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 
 function filterData(searchText, restaurants) {
   const filterData1 = restaurants.filter((restaurant) =>
-    restaurant?.data?.data?.name
-      ?.toLowerCase()
-      ?.includes(searchText.toLowerCase())
+    restaurant?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
   );
   //console.log(restaurants);
   // console.log(filterData1);
