@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 // Firstly the consttructor will be Called
 // then render method
 // then componentDidMount
@@ -36,9 +37,17 @@ class ProfileCls extends React.Component {
   //Most imp part is render method
   render() {
     console.log("render method called");
+
     return (
       <div>
-        <h1>Profile class component</h1>
+        <UserContext.Consumer>
+          {({ user }) => (
+            <h4 className="font-bold text-xl p-10">
+              {user.name}-{user.email}
+            </h4>
+          )}
+        </UserContext.Consumer>
+        ;<h1>Profile class component</h1>
         <img src={this.state.userInfo.avatar_url} />
         <h2>Name : {this.state.userInfo.name}</h2>
         <h2>Location: {this.state.userInfo.location}</h2>

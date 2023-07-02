@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/Header";
 import { Body } from "./components/Body";
@@ -10,10 +10,15 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 // import Instamart from "./components/Instamart";
 const Instamart = lazy(() => import("./components/Instamart"));
 //Upon Demand loading -> upon render -> suspends loading
+//DONT DO LAZY LOADING INSIDE COMPONENT ---DO IT JUST AFTER IMPORT COMPONENTS
 
 /* How to create object for sending data
 const pizza = {
@@ -32,12 +37,19 @@ const pizza = {
 // Dynamic import
 
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Sweety",
+    email: "luhaniwalsweety@gmail.com",
+  });
+
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
+    <Provider store={store}>
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -49,7 +61,14 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: (
+          <Body
+          // user={{
+          //   name: "Sweety",
+          //   email: "luhaniwalsweety@gmail.com",
+          // }}
+          />
+        ),
       },
       {
         path: "/about",
@@ -77,6 +96,10 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

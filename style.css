@@ -1,3 +1,31 @@
+/* @import "./node_modules/tailwindcss/base";
+@import "./node_modules/tailwindcss/components";
+@import "./node_modules/tailwindcss/utilities"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Normal Native CSS
+SCSS
+inline CSS
+Component libraries- Material UI,Base UI , Ant,Chakra,Styled components
+Tailwind css framework 
+
+
+PROS OF TAILWIND:
+Easy to use
+No duplicate css
+faster development
+easy to debug
+more control over things
+can customize UI as required
+
+CONS
+very few ppl know tailwind -initial learning will take time
+very big classname-looks weird-readablity is less
+*/
+/*
 .header {
   display: flex;
   justify-content: space-between;
@@ -38,4 +66,4 @@
 }
 .menu {
   display: flex;
-}
+} */

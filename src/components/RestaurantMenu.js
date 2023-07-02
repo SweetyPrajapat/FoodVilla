@@ -2,16 +2,24 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const restaurant = useRestaurant(resId);
 
+  const dispatch = useDispatch();
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
+
   if (!restaurant) {
     return <Shimmer />;
   }
   return (
-    <div className="menu">
+    <div className="flex">
       <div>
         <h1> Restaurantr id:{resId}</h1>
 

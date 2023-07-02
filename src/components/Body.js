@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { RestaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -6,12 +6,15 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import Offline from "./Offline";
 import useOnline from "../utils/useOnline";
+//import UserContext from "../utils/UserContext";
 
 export const Body = () => {
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
   // const [allRestaurants, setAllRestaurants] = useState(RestaurantList);
+  //const { user, setUser } = useContext(UserContext);
+
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -21,9 +24,10 @@ export const Body = () => {
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.4192141&lng=76.9884276&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // console.log(json?.data?.cards[0]?.data?.data?.cards);
   }
 
   const isOnline = useOnline();
@@ -39,35 +43,52 @@ export const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="p-5 bg-pink-50 my-5">
+        <div className="text-center">
+          <input
+            type="text"
+            className="bg-zinc-100 rounded-md focus:bg-pink-200 p-2 m-2"
+            placeholder="Search"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="p-2 m-2 bg-purple-900 hover:bg-pink-900 text-white rounded-md"
+            onClick={() => {
+              const data = filterData(searchText, allRestaurants);
+              // console.log(data);
+              if (searchText === "") {
+                setFilteredRestaurant(allRestaurants);
+              }
+              setFilteredRestaurant(data);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        {/* getting dynamic value change on page
+         <input
+          value={user.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+        ></input>
+
         <input
-          type="text"
-          className="search-input"
-          placeholder="Search"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        />
-        <button
-          className="search-btn"
-          onClick={() => {
-            const data = filterData(searchText, filteredRestaurant);
-            // console.log(data);
-            setFilteredRestaurant(data);
-          }}
-        >
-          Search
-        </button>
+          value={user.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        ></input> */}
       </div>
-      <div className="restaurant-list">
+      <div className="flex w-full flex-wrap justify-center">
         {filteredRestaurant.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant?.data?.id}
               key={restaurant?.data?.id}
             >
-              <RestaurantCard {...restaurant.data} />
+              <div className="hover:blur-none">
+                <RestaurantCard {...restaurant.data} />
+              </div>
             </Link>
           );
         })}
@@ -83,3 +104,4 @@ export const Body = () => {
     </>
   );
 };
+export default Body;
