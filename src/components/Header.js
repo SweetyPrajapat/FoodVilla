@@ -36,9 +36,9 @@ export const Header = () => {
           <Link to="/about">
             <li className="px-2">About</li>
           </Link>
-          <Link to="/contact">
+          {/* <Link to="/contact">
             <li className="px-2">Contact</li>
-          </Link>
+          </Link> */}
 
           <Link to="/instamart">
             <li className="px-2">Instamart</li>
