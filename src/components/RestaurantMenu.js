@@ -19,24 +19,28 @@ const RestaurantMenu = () => {
     return <Shimmer />;
   }
   return (
-    <div className="flex">
-      <div>
-        <h1> Restaurantr id:{resId}</h1>
-
-        <h2>{restaurant.cards[0].card.card.info.name}</h2>
-
-        <img
-          src={
-            IMG_CDN_URL + restaurant.cards[0].card.card.info.cloudinaryImageId
-          }
-        />
-        <h3>{restaurant.cards[0].card.card.info.areaName}</h3>
-        <h3>{restaurant.cards[0].card.card.info.city}</h3>
-        <h3>{restaurant.cards[0].card.card.info.avgRating}</h3>
-        <h3>{restaurant.cards[0].card.card.info.costForTwoMessage}</h3>
+    <div className="max-w-screen-md max-h-fit mt-20 mx-auto my-auto mb-0">
+      <div className="flex justify-between px-4 py-4 pt-9 pb-9 border-solid border-b-2">
+        <div className="flex justify-between items-center">
+          <img
+            className="h-44"
+            src={
+              IMG_CDN_URL + restaurant.cards[0].card.card.info.cloudinaryImageId
+            }
+          />
+          <div className="m-5">
+            <h2 className="text-lg">
+              {restaurant.cards[0].card.card.info.name}
+            </h2>
+            <h2>{restaurant.cards[0].card.card.info.cuisines.join(", ")}</h2>
+            <h3>{restaurant.cards[0].card.card.info.areaName}</h3>
+            <h3>{restaurant.cards[0].card.card.info.city}</h3>
+            <h3>{restaurant.cards[0].card.card.info.costForTwoMessage}</h3>
+          </div>
+        </div>
       </div>
       <div>
-        <h1>Menu</h1>
+        <h1 className="text-center text-2xl font-bold">Menu</h1>
         <ul>
           {/* {Object.values(
             restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
@@ -49,7 +53,7 @@ const RestaurantMenu = () => {
               (item) => (
                 <div
                   key={item.card.info.id}
-                  className="flex align-center justify-between border-b-2 mt-2"
+                  className="flex bg-white align-center justify-between border-b-2 mt-2"
                 >
                   <div className=" m-3">
                     <h1 className="text-lg font-bold">{item.card.info.name}</h1>

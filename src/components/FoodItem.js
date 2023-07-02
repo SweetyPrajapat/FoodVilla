@@ -9,7 +9,7 @@ const FoodItem = ({ name, description, imageId, defaultPrice }) => {
         <h4>Rupees : {defaultPrice / 100}</h4>
       </div>
       <img className="w-29 h-28 rounded-lg" src={IMG_CDN_URL + imageId} />
-      <button className="m-6 border-slate-400 rounded text-green-600  w-32 h-14 ">
+      <button className="m-6 border border-green-800 rounded text-green-600  w-28 h-12 ">
         Remove
       </button>
     </div>

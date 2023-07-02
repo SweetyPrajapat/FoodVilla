@@ -49,7 +49,7 @@ export const Header = () => {
         </ul>
       </div>
       {/* <span className="p-10 font-bold text-red-900">{user.name}</span> */}
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? (
         <button
           onClick={() => {
             setIsLoggedIn(false);
@@ -65,7 +65,7 @@ export const Header = () => {
         >
           Login
         </button>
-      )}
+      )} */}
     </div>
   );
 };
