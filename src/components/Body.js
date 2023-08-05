@@ -21,12 +21,17 @@ export const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.4192141&lng=76.9884276&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.591945&lng=73.73897649999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     // console.log(json);
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setAllRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurant(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
     // console.log(json?.data?.cards[0]?.data?.data?.cards);
   }
 
@@ -87,7 +92,7 @@ export const Body = () => {
               key={restaurant?.data?.id}
             >
               <div className="hover:blur-none">
-                <RestaurantCard {...restaurant.data} />
+                <RestaurantCard {...restaurant.info} />
               </div>
             </Link>
           );

@@ -19,14 +19,14 @@ export const Header = () => {
   const { user } = useContext(UserContext);
 
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
   // useEffect(() => {
   //   console.log("useEffect");
   // }, []);
 
   // console.log("render");
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg sticky top-0 ">
+    <div className="flex justify-between bg-pink-100 shadow-lg sticky top-0">
       <Title />
       <div className="my-10">
         <ul className="flex">

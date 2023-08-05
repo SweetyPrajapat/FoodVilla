@@ -47,7 +47,7 @@ const AppLayout = () => {
       <UserContext.Provider value={{ user: user, setUser: setUser }}>
         <Header />
         <Outlet />
-        <Footer />
+        <Footer className="caption-bottom" />
       </UserContext.Provider>
     </Provider>
   );

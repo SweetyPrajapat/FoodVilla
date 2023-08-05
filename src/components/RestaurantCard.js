@@ -11,6 +11,7 @@ const RestaurantCard = ({
   // console.log(props);
   // const { name, cuisines, cloudinaryImageId, avgRating } = restaurant.data.data;
   // console.log(name);
+  console.log(name);
   return (
     <div className="w-56 p-2 m-2 shadow-md bg-purple-50">
       <img src={IMG_CDN_URL + cloudinaryImageId} />
