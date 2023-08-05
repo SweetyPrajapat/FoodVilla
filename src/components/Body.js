@@ -88,8 +88,8 @@ export const Body = () => {
         {filteredRestaurant.map((restaurant) => {
           return (
             <Link
-              to={"/restaurant/" + restaurant?.data?.id}
-              key={restaurant?.data?.id}
+              to={"/restaurant/" + restaurant?.info?.id}
+              key={restaurant?.info?.id}
             >
               <div className="hover:blur-none">
                 <RestaurantCard {...restaurant.info} />
